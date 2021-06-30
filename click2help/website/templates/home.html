@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+  <div class="container mt-5 black_text">
+    <div class="row justify-content-between">
+      <div class="col-5 background-home rounded mr-3 mt-5">
+    {% if blog_posts %}<div class="p-3">
+    <u><h3><a class="black_text" href="{{ url_for('views.posts') }}">Read the latest blog updates:</a></h3></u>
+    <h2 class="text-center"></a>{{ blog_posts[0] }}</h2>
+    {% if blog_posts[0].post_image %}
+    <a href="{{ url_for('views.posts') }}"><img class="img-fluid" src="static/images/{{ blog_posts[0].post_image }}"></a>
+    {% else %}
+    {% if blog_posts[0].content|length > 500 %}
+    <p>{{first_blog_chars}}...</p>
+    {% else %}
+    <p>{{blog_posts[0].content}}</p>
+    {% endif %}
+    {% endif %}
+    </div>{% endif %}
+    </div>
+    <div class="col-5 background-home rounded ml-3 mt-5">
+    
+    {% if news_posts %}<div class="p-3">
+    <u><h3><a class="black_text" href="{{ url_for('views.news_posts') }}">Read the latest news:</a></h3></u>
+    <h2 class="text-center"></a>{{ news_posts[0] }}</h2>
+    {% if news_posts[0].news_image %}
+    <a href="{{ url_for('views.news_posts') }}"><img class="img-fluid" src="static/images/{{ news_posts[0].news_image }}"></a>
+    {% else %}
+    {% if news_posts[0].content|length > 500 %}
+    <p>{{first_news_chars}}...</p>
+    {% else %}
+    <p>{{news_posts[0].content}}</p>
+    {% endif %}
+    {% endif %}
+    </div>{% endif %}</div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-5 text-center background-home rounded mt-5">
+    <h1><a class="black_text" href="{{ url_for('views.donations') }}">Donation Pool:</a></h1>
+    <h1>{{donations}}€</h1>
+    <br>
+  </div></div></div>
+
+{% endblock %}

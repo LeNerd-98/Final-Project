@@ -1,0 +1,116 @@
+{% extends "base.html" %} {% block title %}Update Account{% endblock %} {% block
+    content %}
+    <div class="container background-class rounded mt-3">
+    <u class="text-white"><h3 class="text-center mt-3">Update Account Data</h3></u>
+      <form action="/update_user" method="POST" class="row">
+      <div class="form-group col-6">
+        <label class="text-white" for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          {% if current_user.email %}
+          value="{{ current_user.email }}"
+          {% endif %}
+          placeholder="Enter email"
+        />
+      </div>
+      <div class="form-group col-6">
+        <label class="text-white" for="userName">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="userName"
+          name="userName"
+          {% if current_user.displayed_name %}
+          value="{{ current_user.displayed_name }}"
+          {% endif %}
+          placeholder="Enter username"
+        />
+      </div>
+      <div class="form-group col-4">
+        <label class="text-white" for="street">Street</label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          name="street"
+          {% if current_user.street %}
+          value="{{ current_user.street}}"
+          {% endif %}
+          placeholder="Enter your street (optional)"
+        />
+      </div>
+      <div class="form-group col-4">
+        <label class="text-white" for="postalcode">Postalcode</label>
+        <input
+          type="text"
+          class="form-control"
+          id="postalcode"
+          name="postalcode"
+          {% if current_user.postalcode %}
+          value="{{ current_user.postalcode }}"
+          {% endif %}
+          placeholder="Enter your postalcode (optional)"
+        />
+      </div>
+      <div class="form-group col-4">
+        <label class="text-white" for="city">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          {% if current_user.city %}
+          value="{{ current_user.city }}"
+          {% endif %}
+          placeholder="Enter your city (optional)" 
+        />
+      </div>
+      <div class="form-group col-6">
+        <label class="text-white" for="link">Promotion link</label>
+        <input
+          type="text"
+          class="form-control"
+          id="link"
+          name="link"
+          {% if current_user.link %}
+          value="{{ current_user.link }}"
+          {% endif %}
+          placeholder="Please enter a link you would like to promote (optional)"
+        />
+      </div>
+      <div class="form-group col-6">
+        <label class="text-white" for="phone_number">Phonenumber</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone_number"
+          name="phone_number"
+          {% if current_user.phone_number %}
+          value="{{ current_user.phone_number }}"
+          {% endif %}
+          placeholder="Enter your phonenumber (optional)"
+        />
+      </div>
+      <div class="form-group col-12">
+        <label class="text-white" for="description">Description</label>
+        <textarea
+          type="text"
+          maxlength="1000"
+          class="form-control"
+          rows="15"
+          id="description"
+          name="description"
+          placeholder="Tell us a little bit about yourself (1000 characters)"
+        >{% if current_user.description %}{{ current_user.description }}{% endif %}</textarea>
+        <small class="text-center text-white">(All information will be publicly accessible)</small>
+      </div>
+      <div class="col-12 text-center mb-3">
+      <button type="submit" class="btn btn-success">Update Account</button>
+    </div>
+    </form>
+  
+</div>
+    {% endblock %}

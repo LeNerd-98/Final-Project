@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Sorted Posts{% endblock %} 
+{% block content %}
+    <div  class="mt-3">
+        <h1 style="display: inline"> Posts by {{ poster.posted_by }} ({{ posts.total }}) </h1>
+        {% if user.is_charity %}
+        <a style="display: inline" class="btn btn-success float-right mt-2" href="/blog/post">+ New Post</a>
+        {% endif %}
+    </div>
+    {% for post in posts.items %}
+    <div class="container p-3 border bg-light rounded mt-3">
+        <div class="row">
+            <div class="col-6">
+    <h2><a href="{{ url_for('views.charity_post_comments', title=post.title) }}">{{post.title}}</a></h2>
+    <small><a href="{{ url_for('views.profiles', posted_by=post.posted_by) }}">{{post.posted_by}} </a> on {{post.posted_on}} </small>
+    </div>
+    <div class="col-6 text-right">
+    {% if user.user_name == post.posted_by or user.is_mod %}
+    <a href="/blog/delete/{{post.id}}", class="btn btn-danger">Delete</a>
+    {% if user.user_name == post.posted_by %}
+    <a href="/blog/edit/{{post.id}}", class="btn btn-success">Edit</a>
+    {% endif %}
+    {% endif %}
+    </div>
+    <div class="col-6 mt-4">
+    <p style="white-space: pre-wrap">{{post.content}}</p>
+    </div>
+    <div class="col-6 mt-4">
+    {% if post.post_image %}
+    <img class="img-fluid" src="/static/images/{{ post.post_image }}">
+    {% endif %}
+    </div></div></div>
+    {% endfor %}
+
+    <div class="mt-3">
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if posts.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('views.charity_posts', posted_by=poster.posted_by, page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('views.charity_posts', posted_by=poster.posted_by, page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

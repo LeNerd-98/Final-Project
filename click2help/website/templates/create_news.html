@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Create News Entry{% endblock %} 
+{% block content %}
+    
+<div class="container p-3 bg-light rounded mt-3 text-dark">
+    <h1>New Post:</h1>
+    <form action="/news/post" method="POST" enctype="multipart/form-data" class="row">
+        <div class="form-group col-12">
+        
+            <label for="title">Title:</label>
+            <input class="form-control border border-dark" type="text" name="title" id="title" placeholder="Enter Title"
+             aria-label="Enter Title">
+        </div>
+        <div class="form-group col-12">
+            <label for="post">Post:</label>
+        <textarea class="form-control border border-dark" id="post" name="post" placeholder="Enter Content" aria-label=" Enter Content"
+            rows="17"></textarea>
+        </div>
+        <div class="form-group col-12">
+            <label>Select image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" id="image">
+                    <label class="custom-file-label" for="image">Select image...</label>
+                </div>
+        </div>
+        <div class="col-12 mt-3 text-center">
+    <button type="submit" class="btn btn-success">Create News Post</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

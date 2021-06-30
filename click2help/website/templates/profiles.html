@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Profile of {{ profile.user_name }} {% endblock %} 
+{% block content %}
+<div class="container p-3 background-class rounded mt-3 text-white">
+  <h1>Account of {{ profile.displayed_name }}</h1>
+  <div class="row">
+    <div class="content-section col-4 mt-3">
+      <img
+        class="img-fluid rounded-circle border border-dark"
+        src="static/images/{{ profile.image_file }}"
+      />
+    </div>
+    <div class="col-8 mt-5">
+      <p>{{profile.description}}</p>
+    </div>
+    <div class="col-3 mt-3">
+      <h2>Name:</h2>
+      <h2>Email:</h2>
+      <h2>Address: <br /><br /></h2>
+      <h2>Phonenumber:</h2>
+      <h2>Website:</h2>
+    </div>
+    <div class="col-9 mt-3 text-truncate">
+      <h2>{{ profile.displayed_name }}</h2>
+      <h2>{{ profile.email }}</h2>
+      <h2>
+        {{ profile.street }}<br />{{ profile.postalcode }}{% if profile.postalcode %}, {% endif %}{{ profile.city }}
+      </h2>
+      <h2>{{ profile.phone_number }}</h2>
+      <h2>
+        <u
+          ><a class="text-white" href="{{ profile.link }}"
+            >{{ profile.link }}</a
+          ></u
+        >
+      </h2>
+    </div>
+
+    <br \ />
+    <div class="col-12 text-left mt-3">
+      <a href="{{ url_for('auth.update_user') }}" class="btn btn-success"
+        >Edit Account</a
+      >
+      <a href="{{ url_for('auth.update_image') }}" class="btn btn-success"
+        >Change Profile Picture</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

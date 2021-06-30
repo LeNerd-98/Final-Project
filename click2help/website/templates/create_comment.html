@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Create Blog Entry{% endblock %} 
+{% block content %}
+<div class="container p-3 bg-light rounded mt-3 text-dark">
+    <form action="/blog/entry/create/{{title.title}}" method="POST" class="row">
+        <div class="col-12">
+            <h1>New Comment:</h1>
+            <br>
+        <label for="post">Comment:</label>
+        <textarea class="form-control" id="comment" name="comment" placeholder="Enter Content" aria-label="Enter Content"
+            rows="3"></textarea>
+        </div>
+        <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-success">Create Comment</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

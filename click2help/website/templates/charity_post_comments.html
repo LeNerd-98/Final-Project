@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Post of {{ title.posted_by }} {% endblock %} 
+{% block content %}
+    <div class="mt-3">
+        <h1 style="display: inline"> Post by {{ title.posted_by }}</h1>
+    </div>
+    {% for post in posts %}
+    <div class="container p-3 border bg-light rounded mt-4">
+        <div class="row">
+            <div class="col-6">
+    <h2>{{post.title}}</h2>
+    <small>posted by <a href="{{ url_for('views.profiles', posted_by=post.posted_by) }}">{{post.posted_by}} </a> on {{post.posted_on.strftime("%Y-%m-%d, %H:%M")}} </small>
+    <br>
+    <small> <a href="{{ url_for('views.charity_posts', posted_by=post.posted_by) }}"> View all posts by {{post.posted_by}} </a></small>
+    <br></div>
+    <div class="col-6 text-right">
+    <a href="/blog/entry/create/{{post.title}}", class="btn btn-success">Create Comment</a>
+    {% if user.user_name == post.posted_by or user.is_mod %}
+    <a href="/blog/delete/{{post.id}}", class="btn btn-danger">Delete</a>
+    {% if user.user_name == post.posted_by %}
+    <a href="/blog/edit/{{post.id}}", class="btn btn-success">Edit</a>
+    {% endif %}
+    {% endif %}
+    </div>
+    <div class="col-12 mt-4">
+    <p style="white-space: pre-wrap">{{post.content}}</p>
+    </div>
+    <div class="col-12 mt-4 text-center">
+    {% if post.post_image %}
+    <img class="img-fluid" src="/static/images/{{ post.post_image }}">
+    {% endif %}
+    </div></div></div>    
+    {% endfor %}
+    
+
+    {% for comment in comments %}
+    <div class="container p-3 border bg-light mt-3">
+        <div class="row">
+            <div class="col-6">
+    <h7 class="bold-font"><a href="{{ url_for('views.profiles', posted_by=comment.posted_by) }}">{{comment.posted_by}}</a> on {{comment.posted_on.strftime("%Y-%m-%d, %H:%M")}}</h7>
+    </div>
+    <div class="col-6 text-right">
+    {% if user.user_name == comment.posted_by or user.is_mod %}
+    <a href="/comment/delete/{{comment.id}}", class="btn btn-danger">Delete</a>
+    {% endif %}
+    </div>
+    <div class="col-12">
+    <p style="white-space: pre-wrap">{{comment.content}}</p>
+    </div></div></div>
+    {% endfor %}
+
+{% endblock %}

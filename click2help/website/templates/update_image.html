@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Update Account{% endblock %} {% block
+    content %}
+    <div class="container background-class rounded mt-3">
+      <u class="text-white"><h3 class="text-center mt-3">Update Account Image</h3></u>
+      <form action="/update_image" class="row" method="POST" enctype="multipart/form-data">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="text-white">Select image</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="image" id="image">
+              <label class="custom-file-label" for="image">Select image...</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-center mb-3">
+          <button type="submit" class="btn btn-success">Update Image</button>
+        </div>
+      </form>
+    </div>
+    {% endblock %} 
